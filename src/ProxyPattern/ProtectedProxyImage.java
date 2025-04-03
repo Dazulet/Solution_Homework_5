@@ -16,6 +16,10 @@ public class ProtectedProxyImage implements Image {
 
     @Override
     public void displayFullImage() {
-
+        if (isAgentLoggedIn) {
+            proxyImage.displayFullImage();
+        } else {
+            System.out.println("Access Denied: Only logged-in agents can view full images.");
+        }
     }
 }
