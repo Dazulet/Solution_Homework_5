@@ -4,15 +4,14 @@ import java.util.Map;
 
 
 public class MarkerStyleFactory {
-    private static final Map<String, MarkerStyle> styles = new HashMap<>();
+    private static final Map<String, Marker> markers = new HashMap<>();
 
-    public static MarkerStyle getMarkerStyle(String iconType, String color, String labelStyle) {
-        String key = iconType + "-" + color + "-" + labelStyle;
-        styles.putIfAbsent(key, new MarkerStyle(iconType, color, labelStyle));
-        return styles.get(key);
+    public static Marker getMarker(String type, String color, String icon) {
+        String key = type + "-" + color + "-" + icon;
+        return markers.computeIfAbsent(key, k -> new MarkerStyle(type, color, icon));
     }
 
-    public static int getTotalStyles() {
-        return styles.size();
+    public static int getUniqueMarkerCount() {
+        return markers.size();
     }
 }

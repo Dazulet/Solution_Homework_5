@@ -1,6 +1,6 @@
 package FlyweightPattern;
 
-public class MarkerStyle {
+public class MarkerStyle implements Marker {
     private final String iconType;
     private final String color;
     private final String labelStyle;
@@ -11,7 +11,9 @@ public class MarkerStyle {
         this.labelStyle = labelStyle;
     }
 
-    public void display(int x, int y) {
-        System.out.println("Displaying " + iconType + " marker at (" + x + ", " + y + ") with color " + color);
+
+    @Override
+    public void draw(int x, int y) {
+        System.out.println(iconType + " at (" + x + ", " + y + ") with " + color + " color and icon " + labelStyle);
     }
 }
