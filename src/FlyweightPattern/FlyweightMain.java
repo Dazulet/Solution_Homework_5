@@ -1,19 +1,24 @@
 package FlyweightPattern;
+import java.util.Random;
 
 public class FlyweightMain {
     public static void main(String[] args) {
-        MapMarker[] markers = new MapMarker[10];
+        Random random = new Random();
+        String[][] markerTypes = {
+                {"Gas Station", "Red", "gas_station_icon.img"},
+                {"Restaurant", "Blue", "restaurant_icon.img"},
+                {"Hospital", "Green", "hospital_icon.img"}
+        };
 
-        markers[0] = new MapMarker(10, 20, MarkerStyleFactory.getMarkerStyle("Hospital", "Red", "Bold"));
-        markers[1] = new MapMarker(15, 25, MarkerStyleFactory.getMarkerStyle("Hospital", "Red", "Bold"));
-        markers[2] = new MapMarker(30, 40, MarkerStyleFactory.getMarkerStyle("Restaurant", "Blue", "Italic"));
-        markers[3] = new MapMarker(50, 60, MarkerStyleFactory.getMarkerStyle("Gas Station", "Green", "Regular"));
-        markers[4] = new MapMarker(70, 80, MarkerStyleFactory.getMarkerStyle("Restaurant", "Blue", "Italic"));
+        int totalMarkers = 7;
 
-        for (MapMarker marker : markers) {
-            if (marker != null) marker.render();
+        for (int i = 0; i < totalMarkers; i++) {
+            String[] markerData = markerTypes[random.nextInt(markerTypes.length)];
+            Marker marker = MarkerStyleFactory.getMarker(markerData[0], markerData[1], markerData[2]);
+            marker.draw(random.nextInt(1000), random.nextInt(1000));
         }
 
-        System.out.println("Total unique marker styles created: " + MarkerStyleFactory.getTotalStyles());
+        System.out.println("Unique markers: " + MarkerStyleFactory.getUniqueMarkerCount());
+        System.out.println("Total markers: " + totalMarkers);
     }
 }
